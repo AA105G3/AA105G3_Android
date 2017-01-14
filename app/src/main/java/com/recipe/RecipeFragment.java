@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidbelieve.drawerwithswipetabs.R;
 import com.collection.CollectionInsertTask;
@@ -70,7 +71,7 @@ public class RecipeFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         showRecipeVOItem();
     }
@@ -120,8 +121,9 @@ public class RecipeFragment extends Fragment {
             final RecipeVO recipeVO = recipeVOList.get(position);
             String url = Common.URL + "RecipeServletAndroid";
             String recipe_no = recipeVO.getRecipe_no();
+            final int apos = position;
 //            String mem_no = memberVO.getMem_no();
-            int imageSize = 480;
+            int imageSize = 800;
 
             viewHolder.iv_recipe_pic.setDrawingCacheEnabled(true); //cache !!!
             viewHolder.iv_recipe_pic.destroyDrawingCache();
@@ -131,6 +133,12 @@ public class RecipeFragment extends Fragment {
             viewHolder.tv_recipe_name.setText(recipeVO.getRecipe_name());
             viewHolder.tv_recipe_time.setText("發布:" + String.valueOf(recipeVO.getRecipe_time()).subSequence(0, 16));
             viewHolder.tv_recipe_total_views.setText("人氣:" + recipeVO.getRecipe_total_views().toString() + " ");
+
+            if (recipeVOList.get(position).getRecipe_edit().equals("編輯中")) {
+                viewHolder.tv_insert_recipe_cont.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.tv_insert_recipe_cont.setVisibility(View.GONE);
+            }
 
             MemberVO recipeByWho = null;
             url = Common.URL + "MemberServletAndroid";
@@ -163,6 +171,18 @@ public class RecipeFragment extends Fragment {
                 image = out.toByteArray();
                 recipeVO.setRecipe_pic(image);
             }
+//            public void onInsertRecipeContClick(View view){
+//                Toast.makeText(getActivity(), "繼續編輯", Toast.LENGTH_SHORT).show();
+//            }
+
+            viewHolder.tv_insert_recipe_cont.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getActivity(), "繼續編輯" + recipeVOList.get(apos).getRecipe_no(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
 
             viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -246,6 +266,7 @@ public class RecipeFragment extends Fragment {
         class ViewHolder extends RecyclerView.ViewHolder {
             TextView tv_recipe_no, tv_recipe_name, tv_recipe_by_who, tv_recipe_time, tv_recipe_total_views;
             ImageView iv_recipe_pic;
+            TextView tv_insert_recipe_cont;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -255,8 +276,12 @@ public class RecipeFragment extends Fragment {
                 tv_recipe_by_who = (TextView) itemView.findViewById(R.id.tv_recipe_member_page_recipe_by_who);
                 tv_recipe_time = (TextView) itemView.findViewById(R.id.tv_recipe_member_page_recipe_time);
                 tv_recipe_total_views = (TextView) itemView.findViewById(R.id.tv_recipe_member_page_recipe_total_views);
+
+                tv_insert_recipe_cont = (TextView) itemView.findViewById(R.id.tv_insert_recipe_cont);
             }
         }
+
+
     }
 
 

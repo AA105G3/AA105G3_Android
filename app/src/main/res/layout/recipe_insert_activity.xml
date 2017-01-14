@@ -258,7 +258,7 @@
                 android:id="@+id/bt_add_recipe_mater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onRecipeInsert_AddRecipeMater"
+                android:onClick="onRecipeInsert_AddRecipeMaterClick"
                 android:text="新增食材" />
 
             <Button

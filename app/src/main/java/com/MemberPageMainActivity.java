@@ -47,7 +47,7 @@ public class MemberPageMainActivity extends AppCompatActivity {
     private String mem_no;// = "M00000001";
     private String mem_name;
     private String mem_own;
-    int imageSize = 400;
+    int imageSize = 800;
     Bitmap bitmap = null;
     private static final int REQ_LOGIN = 1;
     private MemberVO memberVO = new MemberVO();
@@ -253,7 +253,6 @@ public class MemberPageMainActivity extends AppCompatActivity {
     public void onRecipeInsertClick(View view){
         Intent intent = new Intent(this, RecipeInsertActivity.class);
         Bundle bundle = new Bundle();
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXX"+memberVO.getMem_no());
         bundle.putString("mem_no", memberVO.getMem_no());
         intent.putExtras(bundle);
         startActivity(intent);

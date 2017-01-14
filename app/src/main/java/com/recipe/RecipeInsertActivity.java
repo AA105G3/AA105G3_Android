@@ -271,7 +271,7 @@ public class RecipeInsertActivity extends AppCompatActivity {
         }
     }
 
-    public void onRecipeInsert_AddRecipeMater(View view) {
+    public void onRecipeInsert_AddRecipeMaterClick(View view) {
         foodCount++;
 
         switch (foodCount) {
@@ -308,7 +308,7 @@ public class RecipeInsertActivity extends AppCompatActivity {
         }
     }
 
-//    public void onRecipeInsert_AddRecipeMater(View view){
+//    public void onRecipeInsert_AddRecipeMaterClick(View view){
 //        totalEditTexts++;
 //        if (totalEditTexts > 100)
 //            return;
